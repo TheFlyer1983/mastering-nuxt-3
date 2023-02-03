@@ -21,7 +21,7 @@ const lesson = computed(() => {
       Lesson {{ chapter?.number }} - {{ lesson?.number }}
     </p>
     <h2 class="my-0">{{ lesson?.title }}</h2>
-    <div>
+    <div> 
       <a
         v-if="lesson?.sourceUrl"
         class="text-md font-normal text-gray-500"
@@ -37,7 +37,7 @@ const lesson = computed(() => {
         Download Video
       </a>
     </div>
-    <VideoPlayer v-if="lesson?.videoId" :videoId="lesson.videoId"/>
+    <VideoPlayer v-if="lesson?.videoId" :videoId="lesson.videoId" />
     <p>{{ lesson?.text }}</p>
   </div>
 </template>
