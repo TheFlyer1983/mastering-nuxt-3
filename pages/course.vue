@@ -30,7 +30,8 @@ const { chapters } = useCourse();
             v-for="(lesson, index) in chapter.lessons"
             :key="lesson.slug"
             class="prose-sm flex flex-row space-x-1 py-1 font-normal no-underline"
-            :to="`/course/chapter/${chapter.slug}/lesson/${lesson.slug}`"
+            :to="lesson.path"
+            :class="{ 'text-blue-500': lesson.path === $route.path }"
           >
             <span class="text-gray-500"> {{ index + 1 }}. </span>
             <span>{{ lesson.title }}</span>
@@ -45,4 +46,8 @@ const { chapters } = useCourse();
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<!-- <style scoped>
+.router-link-active {
+  @apply text-blue-500;
+}
+</style> -->
