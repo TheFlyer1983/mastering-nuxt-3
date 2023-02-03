@@ -20,9 +20,7 @@ useHead({
   title
 });
 
-const progress = useState('progress', () => {
-  return [];
-});
+const progress = useLocalStorage('progress', [] as Array<Array<boolean>>);
 
 const isLessonComplete = computed(() => {
   if (!progress.value[chapter.value!.number - 1]) {
@@ -70,7 +68,10 @@ const toggleComplete = () => {
     </div>
     <VideoPlayer v-if="lesson?.videoId" :videoId="lesson.videoId" />
     <p>{{ lesson?.text }}</p>
-    <LessonCompleteButton :modelValue="isLessonComplete" @update:modelValue="toggleComplete" />
+    <LessonCompleteButton
+      :modelValue="isLessonComplete"
+      @update:modelValue="toggleComplete"
+    />
   </div>
 </template>
 
