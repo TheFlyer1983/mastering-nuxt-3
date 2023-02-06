@@ -1,5 +1,9 @@
 <script setup lang="ts">
 const { chapters } = useCourse();
+
+const resetError = (error: any) => {
+  error.value = null;
+};
 </script>
 
 <template>
@@ -37,7 +41,23 @@ const { chapters } = useCourse();
     </div>
 
     <div class="prose w-[65ch] rounded-md bg-white p-12">
-      <NuxtPage />
+      <NuxtErrorBoundary>
+        <NuxtPage />
+        <template #error="{ error }">
+          <p>
+            Oh no, something went wrong with the lesson!
+            <code>{{ error }}</code>
+          </p>
+          <p>
+            <button
+              class="bg-gray-500 py-1 px-3 font-bold text-white hover:cursor-pointer"
+              @click="resetError(error)"
+            >
+              Reset
+            </button>
+          </p>
+        </template>
+      </NuxtErrorBoundary>
     </div>
   </div>
 </template>
