@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Provider } from '@supabase/gotrue-js';
+
 const { title } = useCourse();
 const { query } = useRoute();
 const supabase = useSupabaseClient();
@@ -10,10 +12,10 @@ watchEffect(async () => {
   }
 });
 
-const login = async () => {
+const login = async (provider: Provider) => {
   const redirectTo = `${window.location.origin}${query.redirectTo}`;
   const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'github',
+    provider,
     options: { redirectTo }
   });
 
@@ -28,9 +30,10 @@ const login = async () => {
     <h1>Log in to {{ title }}</h1>
     <button
       class="rounded bg-blue-500 py-2 px-4 font-bold text-white"
-      @click="login"
+      @click="login('github')"
     >
-      Log in with Github
+      <span><font-awesome-icon icon="fa-brands fa-github" /></span>
+      <span class="pl-3">Log in with Github</span>
     </button>
   </div>
 </template>
