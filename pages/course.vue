@@ -8,10 +8,11 @@ const resetError = (error: any) => {
 
 <template>
   <div>
-    <div class="prose mb-12">
-      <h1>
+    <div class="mb-4 flex justify-between items-center w-full">
+      <h1 class="text-3xl">
         <span class="font-bold">{{ title }}</span>
       </h1>
+      <UserCard />
     </div>
 
     <div class="flex flex-grow flex-row justify-center">
