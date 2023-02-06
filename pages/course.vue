@@ -2,8 +2,8 @@
 const { chapters } = useCourse();
 
 const resetError = (error: any) => {
-  error.value = null
-}
+  error.value = null;
+};
 </script>
 
 <template>
