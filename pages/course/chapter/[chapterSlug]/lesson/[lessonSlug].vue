@@ -70,7 +70,7 @@ const toggleComplete = () => {
     <p>{{ lesson?.text }}</p>
     <LessonCompleteButton
       :modelValue="isLessonComplete"
-      @update:modelValue="toggleComplete"
+      @update:modelValue="throw createError('Could not update');"
     />
   </div>
 </template>
