@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Provider } from '@supabase/gotrue-js';
 
-const { title } = useCourse();
+const course = await useCourse();
 const { query } = useRoute();
 const supabase = useSupabaseClient();
 const user = useSupabaseUser();
@@ -27,7 +27,7 @@ const login = async (provider: Provider) => {
 
 <template>
   <div class="prose h-9 w-full max-w-2xl">
-    <h1>Log in to {{ title }}</h1>
+    <h1>Log in to {{ course.title }}</h1>
     <button
       class="rounded bg-blue-500 py-2 px-4 font-bold text-white"
       @click="login('github')"

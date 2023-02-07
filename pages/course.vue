@@ -1,16 +1,18 @@
 <script setup lang="ts">
-const { chapters, title } = useCourse();
+const course = await useCourse();
+const firstLesson = await useFirstLesson();
 
-const resetError = (error: any) => {
+const resetError = async (error: any) => {
+  await navigateTo(firstLesson.path);
   error.value = null;
 };
 </script>
 
 <template>
   <div>
-    <div class="mb-4 flex justify-between items-center w-full">
+    <div class="mb-4 flex w-full items-center justify-between">
       <h1 class="text-3xl">
-        <span class="font-bold">{{ title }}</span>
+        <span class="font-bold">{{ course.title }}</span>
       </h1>
       <UserCard />
     </div>
@@ -22,7 +24,7 @@ const resetError = (error: any) => {
         <h3>Chapters</h3>
         <div
           class="mb-4 flex flex-col space-y-1"
-          v-for="chapter in chapters"
+          v-for="chapter in course.chapters"
           :key="chapter.slug"
         >
           <h4>{{ chapter.title }}</h4>
