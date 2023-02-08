@@ -4,7 +4,7 @@ const course = await useCourse();
 const route = useRoute();
 const { chapterSlug, lessonSlug } = route.params;
 const lesson = await useLesson(chapterSlug as string, lessonSlug as string);
-
+const user = useSupabaseUser();
 const store = useCourseProgress();
 const { initialise, toggleComplete } = store;
 
@@ -87,7 +87,7 @@ useHead({
     <LessonCompleteButton
       v-if="user"
       :modelValue="isCompleted"
-      @update:modelValue="throw createError('Could not update');"
+      @update:modelValue="toggleComplete"
     />
   </div>
 </template>
