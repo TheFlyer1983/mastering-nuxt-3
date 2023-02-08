@@ -1,7 +1,7 @@
 import { StorageSerializers } from '@vueuse/core';
 
-export const useFetchWithCache = async <T>(url: string) => {
-  //Use sessionStorage to cach the lesson data
+export default async <T>(url: string) => {
+  // Use sessionStorage to cache the lesson data
   const cached = useSessionStorage<T>(url, null, {
     // By passing null as default it can't automatically
     // determine which serializer to use
@@ -9,7 +9,9 @@ export const useFetchWithCache = async <T>(url: string) => {
   });
 
   if (!cached.value) {
-    const { data, error } = await useFetch<T>(url);
+    const { data, error } = await useFetch<T>(url, {
+      headers: useRequestHeaders(['cookie']) as HeadersInit
+    });
 
     if (error.value) {
       throw createError({
@@ -20,9 +22,7 @@ export const useFetchWithCache = async <T>(url: string) => {
 
     cached.value = data.value as T;
   } else {
-    console.log(
-      `Getting value from cache for ${url}`
-    );
+    console.log(`Getting value from cache for ${url}`);
   }
 
   return cached;
